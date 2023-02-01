@@ -1,0 +1,88 @@
+'''
+模块引入的问题：1、哪些模块可以被引入； builtins;sys.path:列表，存储一系列目录
+2被引入之后的模块，更新问题  :模块重载：1 form imp import reload
+                                 2 reload(目标模块）
+                                 3 重新调用就OK了
+文件路径问题：D:/ =D:\\
+'''
+import random
+#import tank05
+import sys
+result = sys.path
+print(type(result))
+for tempPath in result:
+    print(tempPath)
+# import random
+
+def test():
+    print("I'm random")
+
+#手动将坦克大战列表加入，可以引入
+result.append('D:\\pythonProject\\venv\\tank05.py')
+print(type(result))
+for tempPath in result:
+    print(tempPath)
+
+def test():
+    print("I'm test")
+'''
+import TestModule
+TestModule.test()
+'''
+#176IP
+'''
+查看IP地址：ipconfig
+IPV4
+子网掩码 32位，四字节，每个字节8位（二进制）
+区分网络号和主机号
+网络基础-端口号：  用来标记区分进程
+网络基础-协议： 网络接口层（链路层）、网络层、传输层、应用层。
+socket编程-套接字（插座），通过网络完成进程间的通信，应用和传输层的接口
+      是TCP/IP协议的封装
+UDP用户数据报协议，TCP是传输控制协议
+TCP三次对话协议（慢得不太明显）
+
+'''
+import socket
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                  #IPV4          UDP/TCP协议
+from socket import *
+s = socket(AF_INET, SOCK_DGRAM)    #导入协议
+s.bind(('',8788))    #绑定端口
+s.sendto(b'hello'.encode('gb2312'), ('192.168.0.1', 8888))#发数据
+redata = s.recvfrom(1024)    #接受数据-数据已经转码
+print(redata[0].decode('gb2312'))    #解析接受的数据
+s.close()    #关闭
+
+udpSock = socket(AF_INET, SOCK_DGRAM)    #导入协议
+udpSock.bind(('',8788))
+while True:
+    recvData = udpSock.recvfrom(1024)
+    print(recvData[0].decode('gb2312'))  # 解析接受的数据
+    data = input('请输入：')
+    # udpSock.sendto(recvData[0], recvData[1])
+    udpSock.sendto(data.encode(),recvData[1])
+
+udpSock.close()
+
+'''
+TFTP介绍-简单文件协议 186结束
+'''
+import struct
+cmb_buf = struct.pack('!H8sb5sb', 1, b'test.jpg', 0, b'octet', 0)
+udpSock = socket(AF_INET, SOCK_DGRAM)
+udpSock.sendto(cmb_buf,('192.168.0.1', 8888))
+f = open(filename, 'ab')
+while True:
+    recv_data = s.recvfrom(1024) #接收数据
+    caozuoma, act_num = struct.unpack('!HH', recv_data[0][:4])    #获取数据块编号
+    rand_port = recv_data[1][1]    #获取服务器的随机端口
+    if int(caozuoma) == 5:
+        print('文件不存在……')
+        break
+    print('操作码：%d, ACK: %d, 服务器随机端口： %d, 数据长度： %d'%(caozuoma, act_num, rand_port, len(recv_data[0][:4])))
+    f.write(recv_data[0][:4])    #将数据写入
+    if len(recv_data[0]) < 516:
+        break
+    act_data = struct.pack("!HH", 4, act_num)
+    s.sendto(act_data, (sever_ip, rand_port))    #回复ACK确认包
