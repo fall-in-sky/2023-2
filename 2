@@ -1,0 +1,160 @@
+'''161-168之前学C时学过
+== 比较值是否相等
+is：比较两个变量是否为同一个
+基本类型
+[-5,256]
+  小整数池：小整数池中的数值，全局共享同一份
+引用类型：
+
+'''
+a =100
+b =100
+print(a == b)
+print(a is b)
+print(id(a))
+print(id(b))
+
+list1 = [1,2,3]
+list2 = [1,2,3]
+print(list1 == list2)
+print(list1 is list2)
+print(list1[0] == list2[0])
+
+'''
+深浅复制
+  1、浅复制copy.copy()
+  2、深复制copy.deepcopy()
+区别与联系：
+  1、联系：复制一个新的被封来
+  2、区别
+    1、对于普通的对象没有区别
+    如果目标对象是复合对象<一个对象的成员变量还是对象>的话，有区别
+      深复制递归复制
+      浅复制，只复制直接对象
+    普通对象
+    list1 = [1,2]
+    复合对象
+    list2 = [[1,2], [3,4]]
+
+'''
+import copy
+
+list1 = [1,2]
+#浅复制
+list2 = copy.copy(list1)
+#深复制
+list3 = copy.deepcopy(list1)
+print(list1)
+print(list2 is list1)
+print(id(list2))
+print('-'*50)
+print(list3)
+print(list3 is list1)
+print(id(list3))
+
+print('-'*50)
+
+list2 = [3,4]
+#复合对象
+list3 = [list1,list2]
+#浅复制
+list4 = copy.copy(list3)
+#深复制
+list5 = copy.deepcopy(list3)
+print(list3)
+print(list4[0] is list3[0])
+print(list5[0] is list3[0])
+print('-'*50)
+'''
+计算机中的进制问题：十进制，二进制，八进制，十六进制
+0-9 A-F
+进制转换：十进制转其他进制，其他进制转十进制
+'''
+num = 100
+v1 = bin(num)
+print(type(v1))
+print(v1)
+
+v2 = oct(num)
+print(type(v2))
+print(v2)
+
+v3 = hex(num)
+print(type(v3))
+print(v3)
+
+v4 = int('0b1100100',2)
+print(type(v4))
+print(v4)
+
+v5 = int('0o144',8)
+print(type(v5))
+print(v5)
+
+v6 = int('0x64',16)
+print(type(v6))
+print(v6)
+'''
+原码反码补码:验证计算机怎么计算，只识别二进制
+正数：原码=反码=补码
+负数：最高位为符号位 原码 反码（原码除符号位外所有位数取反），补码（反码加1）
+补码->反码 继续取反加一
+位运算符 <<:二进制左移n位，乘以2^n
+>>:与上面相反
+&:两个二进制操作数全为1结果为1，否则都为0
+|:两个二进制操作数全为0结果为1，否则都为1
+^:两个二进制操作数相同为0，不同为1 异或，对一个数异或两次得到其本身
+~:取反 二进制最高为符号位 先取反，若为负数，再取反加一（就是从补码到原码）
+'''
+
+print('-'*50)
+print(2<<2)
+print(2<<3)
+print(8>>2)
+print(8>>3)
+print( 5 & 3)
+print( 5 | 3)
+print( 5 ^ 3)
+a=5
+b=10
+a=(a^b)
+print(a)
+a=(a^b)
+print(a)
+print(~5)
+print('-'*50)
+
+'''
+属性私有化
+1.xx
+  一般情况下使用的变量
+2._xx
+  _display
+  在某个模块中，如果变量是_xx的方式
+  from tank05 import *的方式无法使用？？
+3.__xx
+  私有属性，私有方法
+  名字重整（改名）
+    _类名__私有属性名
+    _类名__私有方法名
+4.__xx__
+  主要用于方法
+  __init__
+  __del__
+  __new__
+  __str__
+  Magic Method
+  自定义方法避免与魔法方法重名
+5.xx_
+  用来区分变量名/方法名
+  
+@property的使用：
+    私有属性，提供开放接口，供外界进行访问
+装饰器，简化私有属性的访问方式
+@属性.setter
+
+import tank05
+print(tank05._display)
+from tank05 import *
+print(tank05._display)
+'''
