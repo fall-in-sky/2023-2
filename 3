@@ -1,0 +1,87 @@
+import multiprocessing
+import time
+
+
+class Student():
+    def __init__(self,name,age):
+        self.name = name
+        #私有属性
+        self.__age = age
+    def getAge(self):
+        return self.__age
+    def setAge(self,age):
+        if isinstance(age,int):
+            self.__age = age
+        else:
+            raise TypeError('类型错误')
+    age = property(getAge,setAge)
+stu1 = Student('张伟', 18)
+stu1.setAge(17)
+print(stu1.getAge())
+print(stu1.age)
+
+class P():
+    def __init__(self,name,age):
+        self.name = name
+        self.__age = age
+        print('我的名字叫{0}，年龄是{1}',name,age)
+    age = property
+print(P(a,22))
+
+class Account():
+    def __init__(self):
+        self.__money = 0
+    @property
+    def money(self):
+        return self.__money
+    @money.setter
+    def money(self,money):
+        if isinstance(money,int):
+            self.__money = money
+        else:
+            raise TypeError('金钱类型有误')
+m = Account()
+m.money = 100
+print(m.money)
+
+from multiprocessing import Process
+def run(name):
+    print('123%s'%(name))
+def run1():
+    print('234')
+if __name__ == "__main":
+    p = Process(target=run, args=('test', 12))    #位置参数元组
+    p.start()
+    p.join()
+    p1 = Process(target=run1)
+    p1.start()
+    p1.join()
+
+p.start()
+p.run()
+p.terminate()
+p.is_alive()
+p.join()
+
+class MyProcess(multiprocessing.Process):
+    def run(self):
+        n = 5
+        while n > 0:
+            print(n)
+            time.sleep(1)
+            n -=1
+if __name__ == "__main__":
+    p = multiprocessing.Process(target=test)
+    p.start()
+    p.join()
+
+def work(num):
+    print(num)
+    time.sleep(1)
+if __name__ == '__main__':
+    po = Pool(10)
+    for i in range(20):
+        po.apply_asyync(work, (i,))
+    po.close()
+    po.join()
+    
