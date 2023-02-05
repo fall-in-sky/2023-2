@@ -1,0 +1,39 @@
+tcpSock = socket(AF_INET, SOCK_STREAM)
+tcpSock.bind(('', 7788))
+tcpSock.listen(5)
+newSock, clientAddr = tcpSock.accept()
+
+data = newSock.recv(1024)
+newSock.send(b'xiexie')
+newSock.close()
+tcpSock.close()
+
+clientSock.connect(("192.168.1.17", 77))
+print(data)
+clientSock.send(b'xiexie')
+'''
+数据库概述
+一、数据库简介
+  1.数据管理技术发展
+    人工管理
+    文件管理
+    数据库系统管理
+    
+  2.数据库相关概念
+    1、数据 描述事物的符号  例如文本  文字  图片  音频  视频等
+    2、数据库  车库  粮库  存储数据
+    3、数据库管理系统  对数据库中数据进行管理
+      流行的关系型数据库有（oracle MySQL DB2 SQL Server）
+    4、数据库应用程序
+      最终用户使用的应用程序，在数据库管理系统基础上，带有图形化界面的应用程序
+    5、数据库管理员
+      对数据库系统操作的人员，主要负责对数据库进行运营和维护
+    6、最终用户
+      对数据库应用程序的使用者
+  3.上面是SQL语言
+  SQL：结构化查询语言简称
+  a.DQL  用于对数据库的查询 select from where
+  b.DML  用于对数据的增  删除  修改
+  c.DDL  用于对数据库中对象（表、索引、视图）
+      
+'''
