@@ -1,0 +1,59 @@
+class StarFruit(Plant):
+    def __init__(self, x, y, bullet_group, level):
+        Plant.__init__(self, x, y, c.STARFRUIT, c.PLANT_HEALTH, bullet_group)
+        self.shoot_timer = 0
+        self.level = level
+        self.map_x, self.map_y = self.level.map.getMapIndex(x, y)
+
+    def canAttack(self, zombie):
+        if (zombie.name == c.SNORKELZOMBIE) and (zombie.frames == zombie.swim_frames):
+            return False
+        if zombie.state != c.DIE:
+            zombie_map_y = self.level.map.getMapIndex(zombie.rect.centerx, zombie.rect.bottom)[1]
+            if (self.rect.x >= zombie.rect.x) and (self.map_y == zombie_map_y):  # 对于同行且在杨桃后的僵尸
+                return True
+            # 斜向上，理想直线方程为：
+            # f(zombie.rect.x) = -0.75*(zombie.rect.x - (self.rect.right - 5)) + self.rect.y - 10
+            # 注意实际上为射线
+            elif (-100 <= (zombie.rect.y - (-0.75*(zombie.rect.x - (self.rect.right - 5)) + self.rect.y - 10)) <= 70
+            and (zombie.rect.left <= c.SCREEN_WIDTH) and (zombie.rect.x >= self.rect.x)):
+                return True
+            # 斜向下，理想直线方程为：f(zombie.rect.x) = zombie.rect.x + self.rect.y - self.rect.right - 15
+            # 注意实际上为射线
+            elif (abs(zombie.rect.y - (zombie.rect.x + self.rect.y - self.rect.right - 15)) <= 70
+            and (zombie.rect.left <= c.SCREEN_WIDTH)
+            and (zombie.rect.x >= self.rect.x)):
+                return True
+            elif zombie.rect.left <= self.rect.x <= zombie.rect.right:
+                return True
+        return False
+
+    def attacking(self):
+        if self.shoot_timer == 0:
+            self.shoot_timer = self.current_time - 700
+        elif (self.current_time - self.shoot_timer) >= 700:
+            # pypvz特有设定：向后打的杨桃子弹无视铁门与报纸防具
+            self.bullet_group.add(StarBullet(   self.rect.left - 10, self.rect.y + 15,
+                                                c.BULLET_DAMAGE_NORMAL, c.STAR_BACKWARD,
+                                                self.level, damage_type = c.ZOMBIE_COMMON_DAMAGE))
+            # 其他方向的杨桃子弹伤害效果与豌豆等同
+            self.bullet_group.add(StarBullet(   self.rect.centerx - 20, self.rect.bottom - self.rect.h - 15,
+                                                c.BULLET_DAMAGE_NORMAL, c.STAR_UPWARD,
+                                                self.level))
+            self.bullet_group.add(StarBullet(   self.rect.centerx - 20, self.rect.bottom - 5,
+                                                c.BULLET_DAMAGE_NORMAL, c.STAR_DOWNWARD,
+                                                self.level))
+            self.bullet_group.add(StarBullet(   self.rect.right - 5, self.rect.bottom - 20,
+                                                c.BULLET_DAMAGE_NORMAL, c.STAR_FORWARD_DOWN,
+                                                self.level))
+            self.bullet_group.add(StarBullet(   self.rect.right - 5, self.rect.y - 10,
+                                                c.BULLET_DAMAGE_NORMAL, c.STAR_FORWARD_UP,
+                                                self.level))
+            self.shoot_timer = self.current_time
+            # 播放发射音效
+            c.SOUND_SHOOT.play()
+
+    def setAttack(self):
+        self.state = c.ATTACK
+        if self.shoot_timer != 0:
+            self.shoot_timer = self.current_time - 700
