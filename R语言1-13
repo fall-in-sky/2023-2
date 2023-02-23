@@ -57,3 +57,151 @@ character(0)
 > x<-1
 > x+y
 [1] 3
+> x<-1
+> y<-2
+> x+y
+[1] 3
+> getwd()
+[1] "C:/Users/Lenovo/Documents"
+> setwd(dir = ""C:/Users/Lenovo/Documents"")
+错误: unexpected symbol在"setwd(dir = ""C"里
+> setwd(dir = "C:/Users/Lenovo/Documents")
+> list.files()
+ [1] "desktop.ini"        "KingsoftData"       "My Music"           "My Pictures"        "My Videos"          "MYVideoProject"     "Picosmos"           "QQPCMgr"           
+ [9] "Tencent Files"      "Visual Studio 2019" "WeChat Files"       "自定义 Office 模板"
+> dir()
+ [1] "desktop.ini"        "KingsoftData"       "My Music"           "My Pictures"        "My Videos"          "MYVideoProject"     "Picosmos"           "QQPCMgr"           
+ [9] "Tencent Files"      "Visual Studio 2019" "WeChat Files"       "自定义 Office 模板"
+> x
+[1] 1
+> y
+[1] 2
+> xx<<-5
+> x
+[1] 1
+> xx
+[1] 5
+> y <-sum(1,2,3,4,5)
+> y
+[1] 15
+> z<-mean(1,2,3,4)
+> z
+[1] 1
+> ls.str()
+x :  num 1
+xx :  num 5
+y :  num 15
+z :  num 1
+> str(x)
+ num 1
+> ls(all.names = TRUE)
+[1] "x"  "xx" "y"  "z" 
+> x
+[1] 1
+> rm(x)
+> x
+错误: 找不到对象'x'
+> rm(y,z)
+> rm(list=ls())
+> history()
+> install.package()
+Error in install.package() : 没有"install.package"这个函数
+> install.packages()
+--- 在此連線階段时请选用CRAN的鏡子 ---
+Warning in install.packages() :
+  'lib="C:/Program Files/R/R-4.2.2/library"'不可写
+还安装相依关系‘zoo’, ‘colorspace’, ‘lmtest’
+
+试开URL’https://mirrors.ustc.edu.cn/CRAN/bin/windows/contrib/4.2/zoo_1.8-11.zip'
+Content type 'application/zip' length 1018900 bytes (995 KB)
+downloaded 995 KB
+
+试开URL’https://mirrors.ustc.edu.cn/CRAN/bin/windows/contrib/4.2/colorspace_2.1-0.zip'
+Content type 'application/zip' length 2624889 bytes (2.5 MB)
+downloaded 2.5 MB
+
+试开URL’https://mirrors.ustc.edu.cn/CRAN/bin/windows/contrib/4.2/lmtest_0.9-40.zip'
+Content type 'application/zip' length 405635 bytes (396 KB)
+downloaded 396 KB
+
+试开URL’https://mirrors.ustc.edu.cn/CRAN/bin/windows/contrib/4.2/vcd_1.4-11.zip'
+Content type 'application/zip' length 1268083 bytes (1.2 MB)
+downloaded 1.2 MB
+
+程序包‘zoo’打开成功，MD5和检查也通过
+程序包‘colorspace’打开成功，MD5和检查也通过
+程序包‘lmtest’打开成功，MD5和检查也通过
+程序包‘vcd’打开成功，MD5和检查也通过
+
+下载的二进制程序包在
+        C:\Users\Lenovo\AppData\Local\Temp\RtmpYZHToH\downloaded_packages里
+> library()
+> library(vcd)
+载入需要的程辑包：grid
+> require(vcd)
+> help(package="vcd")
+打开httpd帮助服务器… 好了
+> slpackage:"vcd"
+错误: 找不到对象'slpackage'
+> sl(package:"vcd")
+Error in sl(package:"vcd") : 没有"sl"这个函数
+> ls(package:"vcd")
+Error in as.environment(pos) : 寻找串列里没有"package:"vcd""这样一个项目
+此外: Warning message:
+In ls(package:"vcd") : ‘package:"vcd"’被转换成字符串
+> lspackage:"vcd"
+错误: 找不到对象'lspackage'
+> ls(package:vcd)
+  [1] "agreementplot"         "Arthritis"             "assoc"                
+  [4] "assocstats"            "Baseball"              "binreg_plot"          
+  [7] "BrokenMarriage"        "Bundesliga"            "Bundestag2005"        
+ [10] "Butterfly"             "cd_plot"               "co_table"             
+ [13] "CoalMiners"            "coindep_test"          "cotab_agreementplot"  
+ [16] "cotab_assoc"           "cotab_coindep"         "cotab_fourfold"       
+ [19] "cotab_loddsratio"      "cotab_mosaic"          "cotab_sieve"          
+ [22] "cotabplot"             "DanishWelfare"         "distplot"             
+ [25] "doubledecker"          "Employment"            "Federalist"           
+ [28] "fourfold"              "goodfit"               "grid_abline"          
+ [31] "grid_barplot"          "grid_legend"           "hcl2hex"              
+ [34] "Hitters"               "hls"                   "HorseKicks"           
+ [37] "Hospital"              "independence_table"    "is.structable"        
+ [40] "JobSatisfaction"       "JointSports"           "Kappa"                
+ [43] "labeling_border"       "labeling_cboxed"       "labeling_cells"       
+ [46] "labeling_conditional"  "labeling_doubledecker" "labeling_lboxed"      
+ [49] "labeling_left"         "labeling_list"         "labeling_residuals"   
+ [52] "labeling_values"       "legend_fixed"          "legend_resbased"      
+ [55] "Lifeboats"             "lodds"                 "loddsratio"           
+ [58] "mar_table"             "mosaic"                "mplot"                
+ [61] "MSPatients"            "NonResponse"           "odds"                 
+ [64] "oddsratio"             "Ord_estimate"          "Ord_plot"             
+ [67] "OvaryCancer"           "pairs_assoc"           "pairs_barplot"        
+ [70] "pairs_diagonal_mosaic" "pairs_diagonal_text"   "pairs_mosaic"         
+ [73] "pairs_sieve"           "pairs_strucplot"       "pairs_text"           
+ [76] "PreSex"                "Punishment"            "RepVict"              
+ [79] "Rochdale"              "rootogram"             "Saxony"               
+ [82] "SexualFun"             "shading_binary"        "shading_diagonal"     
+ [85] "shading_Friendly"      "shading_Friendly2"     "shading_hcl"          
+ [88] "shading_hsv"           "shading_Marimekko"     "shading_max"          
+ [91] "shading_sieve"         "sieve"                 "SpaceShuttle"         
+ [94] "spacing_conditional"   "spacing_dimequal"      "spacing_equal"        
+ [97] "spacing_highlighting"  "spacing_increase"      "spine"                
+[100] "struc_assoc"           "struc_mosaic"          "struc_sieve"          
+[103] "strucplot"             "structable"            "Suicide"              
+[106] "table2d_summary"       "ternaryplot"           "tile"                 
+[109] "Trucks"                "UKSoccer"              "VisualAcuity"         
+[112] "VonBort"               "WeldonDice"            "WomenQueue"           
+[115] "woolf_test"           
+Warning message:
+In ls(package:vcd) : ‘package:vcd’被转换成字符串
+> data(package="vcd")
+> ?plot
+> example(mean)
+
+mean> x <- c(0:10, 50)
+
+mean> xm <- mean(x)
+
+mean> c(xm, mean(x, trim = 0.10))
+[1] 8.75 5.50
+> help.search("heatmap")
+> 
